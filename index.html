@@ -1,167 +1,287 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <title>Clicker Test</title>
-    <link rel="stylesheet" type="text/css" href="interface.css" />
-  </head>
-  <body>
-		<div id="header">
-      <h1>The <span id="age">Dawn Age</span> of  <span id="civName">Humanity</span></h1>
-      <div style="clear:both;"></div>
+<head>
+  <title>Clicker Test</title>
+  <link rel="stylesheet" type="text/css" href="interface.css" />
+</head>
+<body>
+<div id="strip">
+  <!-- <div id="stripInner">
+  	<a href="civFAQ.html" target="_blank">FAQ / Instructions / Bugfixing</a> -
+  	<a href="civUpdates.html" target="_blank">Game Updates Log</a> -
+  	<a href="#" onclick="tips()">Tips</a> -
+  	<a href="#" onclick="impExp()">Import/Export Save</a>
+  	<span id="versionAlert"> - <span id="newVersionText" onclick="location.reload()">New Version Available</span></span>
+  </div> -->
+</div>
+<div id="header">
+  <h1>The <span id="age">Dawn Age</span> of  <span id="civName">Humanity</span></h1>
+  <div id="ruler">Ruled by the <span id="appellation">chieftain</span> <span id="rulerName">Default Name</span></div>
+  <div style="clear:both;"></div>
+</div>
+<div id="resources">
+  <div id="resourcesContainer">
+    <div id="basicResourcesContainer">
+      <h3>Basic Resources</h3>
+      <table id="basicResources">
+        <tr>
+          <td><button onmousedown="increment(food)">Gather Food</button></td>
+          <td>Food: </td>
+          <td class="number"><span id="food">0</span></td>
+          <td class="icon"><img src="food.png" class="icon icon-lg" /></td>
+					<td class="number">(Max storage: <span id="maxfood">200</span>)</td>
+          <td class="number net"><span id="netFood">0</span>/s</td>
+        </tr>
+        <tr id="woodTable">
+					<td><button onmousedown="increment(wood)" hidden>Cut Wood</button></td>
+					<td>Wood: </td>
+					<td class="number"><span id="wood">0</span></td>
+					<td class="icon"><img src="wood.png" class="icon icon-lg" /></td>
+					<td class="number">(Max storage: <span id="maxwood">200</span>)</td>
+					<td class="number net"><span id="netWood">0</span>/s</td>
+				</tr>
+				<tr id="stoneTable">
+					<td><button onmousedown="increment(stone)" hidden>Mine Stone</button></td>
+					<td>Stone: </td>
+					<td class="number"><span id="stone">0</span></td>
+					<td class="icon"><img src="stone.png" class="icon icon-lg" /></td>
+					<td class="number">(Max storage: <span id="maxstone">200</span>)</td>
+					<td class="number net"><span id="netStone">0</span>/s</td>
+				</tr>
+				<tr id="scienceTable">
+					<td><button onmousedown="increment(science)" hidden>Do Science</button></td>
+					<td>Science: </td>
+					<td class="number"><span id="science">0</span></td>
+					<td class="icon"><img src="science.png" class="icon icon-lg" /></td>
+					<td class="number">(Max storage: <span id="maxscience">200</span>)</td>
+					<td class="number net"><span id="netScience">0</span>/s</td>
+				</tr>
+      </table>
     </div>
-    <div id="resources">
-      <div id="resourcesContainer">
-        <div id="basicResourcesContainer">
-          <h3>Basic Resources</h3>
-          <table id="basicResources">
-            <tr>
-              <td><button onmousedown="increment(food)">Gather Food</button></td>
-              <td>Food: </td>
-              <td class="number"><span id="food">0</span></td>
-              <td class="icon"><img src="food.png" class="icon icon-lg" /></td>
-    					<td class="number">(Max storage: <span id="maxfood">200</span>)</td>
-              <td class="number net"><span id="netFood">0</span>/s</td>
-            </tr>
-            <tr id="woodTable">
-    					<td><button onmousedown="increment(wood)" hidden>Cut Wood</button></td>
-    					<td>Wood: </td>
-    					<td class="number"><span id="wood">0</span></td>
-    					<td class="icon"><img src="wood.png" class="icon icon-lg" /></td>
-    					<td class="number">(Max storage: <span id="maxwood">200</span>)</td>
-    					<td class="number net"><span id="netWood">0</span>/s</td>
-    				</tr>
-    				<tr id="stoneTable">
-    					<td><button onmousedown="increment(stone)" hidden>Mine Stone</button></td>
-    					<td>Stone: </td>
-    					<td class="number"><span id="stone">0</span></td>
-    					<td class="icon"><img src="stone.png" class="icon icon-lg" /></td>
-    					<td class="number">(Max storage: <span id="maxstone">200</span>)</td>
-    					<td class="number net"><span id="netStone">0</span>/s</td>
-    				</tr>
-    				<tr id="scienceTable">
-    					<td><button onmousedown="increment(science)" hidden>Do Science</button></td>
-    					<td>Science: </td>
-    					<td class="number"><span id="science">0</span></td>
-    					<td class="icon"><img src="science.png" class="icon icon-lg" /></td>
-    					<td class="number">(Max storage: <span id="maxscience">200</span>)</td>
-    					<td class="number net"><span id="netScience">0</span>/s</td>
-    				</tr>
-          </table>
-        </div>
-      </div>
-      <div id="panesSelectors">
-        <div id="selectors">
-    			<div id="selectBuildings" class="paneSelector selected" onclick="paneSelect('buildings')">Buildings</div>
-    			<div id="selectUpgrades" class="paneSelector" onclick="paneSelect('upgrades')">Upgrades</div>
-    			<div id="selectConquest" class="paneSelector" onclick="paneSelect('conquest')">Conquest</div>
-    			<div id="selectTrade" class="paneSelector" onclick="paneSelect('trade')">Trade</div>
-    			<div style="clear:both;"></div>
-    		</div>
+  </div>
+  <div id="panesSelectors">
+    <div id="selectors">
+			<div id="selectBuildings" class="paneSelector selected" onclick="paneSelect('buildings')">Buildings</div>
+			<div id="selectUpgrades" class="paneSelector" onclick="paneSelect('upgrades')">Upgrades</div>
+			<div id="selectConquest" class="paneSelector" onclick="paneSelect('conquest')">Conquest</div>
+			<div id="selectTrade" class="paneSelector" onclick="paneSelect('trade')">Trade</div>
+			<div style="clear:both;"></div>
+		</div>
 
-        <div id="buildingsPane">
-          <h3>Buildings</h3>
-          <table id="buildings" hidden>
-            <tr id="tentRow">
-              <td><button onmousedown="createBuilding(tent,1)">Build Tent</button></td>
-              <td class="buildingten"><button class="x10" onmousedown="createBuilding(tent,10)">x10</button></td>
-              <td class="buildinghundred"><button class="x100" onmousedown="createBuilding(tent,100)">x100</button></td>
-              <td class="buildingthousand"><button class="x1000" onmousedown="createBuilding(tent,1000)">x1k</button></td>
-              <td class="buildCustom"><button onmousedown="buildCustom(tent)">+Custom</button></td>
-              <td class="buildingnames">Tents: </td>
-              <td class="number"><span id="tents">0</span></td>
-              <td><span class="cost">2 skins, 2 wood</span><span class="note">: +1 max pop.</span></td>
-            </tr>
-            <tr id="whutRow">
-              <td><button onmousedown="createBuilding(whut,1)">Build Wooden Hut</button></td>
-              <td class="buildingten"><button class="x10" onmousedown="createBuilding(whut,10)">x10</button></td>
-              <td class="buildinghundred"><button class="x100" onmousedown="createBuilding(whut,100)">x100</button></td>
-              <td class="buildingthousand"><button class="x1000" onmousedown="createBuilding(whut,1000)">x1k</button></td>
-              <td class="buildCustom"><button onmousedown="buildCustom(whut)">+Custom</button></td>
-              <td class="buildingnames">Huts: </td>
-              <td class="number"><span id="whuts">0</span></td>
-              <td><span class="cost">1 skin, 20 wood</span><span class="note">: +3 max pop.</span></td>
-            </tr>
-            <tr id="cottageRow">
-              <td><button onmousedown="createBuilding(cottage,1)">Build Cottage</button></td>
-              <td class="buildingten"><button class="x10" onmousedown="createBuilding(cottage,10)">x10</button></td>
-              <td class="buildinghundred"><button class="x100" onmousedown="createBuilding(cottage,100)">x100</button></td>
-              <td class="buildingthousand"><button class="x1000" onmousedown="createBuilding(cottage,1000)">x1k</button></td>
-              <td class="buildCustom"><button onmousedown="buildCustom(cottage)">+Custom</button></td>
-              <td class="buildingnames">Cottages: </td>
-              <td class="number"><span id="cottages">0</span></td>
-              <td><span class="cost">10 wood, 30 stone</span><span class="note">: +6 max pop.</span></td>
-            </tr>
-            <tr id="houseRow">
-              <td><button onmousedown="createBuilding(house,1)">Build House</button></td>
-              <td class="buildingten"><button class="x10" onmousedown="createBuilding(house,10)">x10</button></td>
-              <td class="buildinghundred"><button class="x100" onmousedown="createBuilding(house,100)">x100</button></td>
-              <td class="buildingthousand"><button class="x1000" onmousedown="createBuilding(house,1000)">x1k</button></td>
-              <td class="buildCustom"><button onmousedown="buildCustom(house)">+Custom</button></td>
-              <td class="buildingnames">Houses: </td>
-              <td class="number"><span id="houses">0</span></td>
-              <td><span class="cost">30 wood, 70 stone</span><span class="note">: +10 max pop.</span></td>
-            </tr>
-            <tr id="mansionRow">
-              <td><button onmousedown="createBuilding(mansion,1)">Build Mansion</button></td>
-              <td class="buildingten"><button class="x10" onmousedown="createBuilding(mansion,10)">x10</button></td>
-              <td class="buildinghundred"><button class="x100" onmousedown="createBuilding(mansion,100)">x100</button></td>
-              <td class="buildingthousand"><button class="x1000" onmousedown="createBuilding(mansion,1000)">x1k</button></td>
-              <td class="buildCustom"><button onmousedown="buildCustom(mansion)">+Custom</button></td>
-              <td class="buildingnames">Mansions: </td>
-              <td class="number"><span id="mansions">0</span></td>
-              <td><span class="cost">200 wood, 200 stone, 20 leather</span><span class="note">: +50 max pop.</span></td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-          </table>
-        </div>
-        <div id="upgradesPane">
-  		      <h3>Upgrades</h3>
-              <h3>Purchased Upgrades</h3>
-    			       <div id="purchased">
-                 </div>
-        </div>
-        <div id="conquestPane">
-          <h3>Conquest</h3>
-        </div>
-        <div id="tradePane">
-          <h3>Trade</h3>
-        </div>
-      </div>
+    <div id="buildingsPane">
+      <h3>Buildings</h3>
+      <table id="buildings" hidden>
+        <tr id="tentRow">
+          <td><button onmousedown="createBuilding(tent,1)">Build Tent</button></td>
+          <td class="buildingten"><button class="x10" onmousedown="createBuilding(tent,10)">x10</button></td>
+          <td class="buildinghundred"><button class="x100" onmousedown="createBuilding(tent,100)">x100</button></td>
+          <td class="buildingthousand"><button class="x1000" onmousedown="createBuilding(tent,1000)">x1k</button></td>
+          <td class="buildCustom"><button onmousedown="buildCustom(tent)">+Custom</button></td>
+          <td class="buildingnames">Tents: </td>
+          <td class="number"><span id="tents">0</span></td>
+          <td><span class="cost">2 skins, 2 wood</span><span class="note">: +1 max pop.</span></td>
+        </tr>
+        <tr id="whutRow">
+          <td><button onmousedown="createBuilding(whut,1)">Build Wooden Hut</button></td>
+          <td class="buildingten"><button class="x10" onmousedown="createBuilding(whut,10)">x10</button></td>
+          <td class="buildinghundred"><button class="x100" onmousedown="createBuilding(whut,100)">x100</button></td>
+          <td class="buildingthousand"><button class="x1000" onmousedown="createBuilding(whut,1000)">x1k</button></td>
+          <td class="buildCustom"><button onmousedown="buildCustom(whut)">+Custom</button></td>
+          <td class="buildingnames">Huts: </td>
+          <td class="number"><span id="whuts">0</span></td>
+          <td><span class="cost">1 skin, 20 wood</span><span class="note">: +3 max pop.</span></td>
+        </tr>
+        <tr id="cottageRow">
+          <td><button onmousedown="createBuilding(cottage,1)">Build Cottage</button></td>
+          <td class="buildingten"><button class="x10" onmousedown="createBuilding(cottage,10)">x10</button></td>
+          <td class="buildinghundred"><button class="x100" onmousedown="createBuilding(cottage,100)">x100</button></td>
+          <td class="buildingthousand"><button class="x1000" onmousedown="createBuilding(cottage,1000)">x1k</button></td>
+          <td class="buildCustom"><button onmousedown="buildCustom(cottage)">+Custom</button></td>
+          <td class="buildingnames">Cottages: </td>
+          <td class="number"><span id="cottages">0</span></td>
+          <td><span class="cost">10 wood, 30 stone</span><span class="note">: +6 max pop.</span></td>
+        </tr>
+        <tr id="houseRow">
+          <td><button onmousedown="createBuilding(house,1)">Build House</button></td>
+          <td class="buildingten"><button class="x10" onmousedown="createBuilding(house,10)">x10</button></td>
+          <td class="buildinghundred"><button class="x100" onmousedown="createBuilding(house,100)">x100</button></td>
+          <td class="buildingthousand"><button class="x1000" onmousedown="createBuilding(house,1000)">x1k</button></td>
+          <td class="buildCustom"><button onmousedown="buildCustom(house)">+Custom</button></td>
+          <td class="buildingnames">Houses: </td>
+          <td class="number"><span id="houses">0</span></td>
+          <td><span class="cost">30 wood, 70 stone</span><span class="note">: +10 max pop.</span></td>
+        </tr>
+        <tr id="mansionRow">
+          <td><button onmousedown="createBuilding(mansion,1)">Build Mansion</button></td>
+          <td class="buildingten"><button class="x10" onmousedown="createBuilding(mansion,10)">x10</button></td>
+          <td class="buildinghundred"><button class="x100" onmousedown="createBuilding(mansion,100)">x100</button></td>
+          <td class="buildingthousand"><button class="x1000" onmousedown="createBuilding(mansion,1000)">x1k</button></td>
+          <td class="buildCustom"><button onmousedown="buildCustom(mansion)">+Custom</button></td>
+          <td class="buildingnames">Mansions: </td>
+          <td class="number"><span id="mansions">0</span></td>
+          <td><span class="cost">200 wood, 200 stone, 20 leather</span><span class="note">: +50 max pop.</span></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
     </div>
-    <div id="population">
-      <div id="populationContainer">
-        <h3>Population</h3>
-        <div id="populationNumbers">
-          <table>
-    				<tr>
-    					<td>Current Population: </td>
-    					<td class="number"><span id="popcurrent">0</span></td>
-    				</tr>
-    				<tr>
-    					<td>Maximum Population: </td>
-    					<td class="number"><span id="popcap">0</span></td>
-    				</tr>
-    			</table>
-    			<br /
-        </div>
-        <div id="populationCreate">
-          <div id="spawn1group"><button id="spawn1" onmousedown="spawn(1)" disabled>Create Worker</button><span class="cost"><span id="workerCost">20</span> food</span><span class="note">: Create a new worker</span><br /></div>
-    			<div id='spawn10'><button id="spawn10button" onmousedown="spawn(10)">Create 10 Workers</button><span class="cost"><span id="workerCost10">200</span> food</span><span class="note">: Create 10 new workers</span></div>
-    			<div id='spawn100'><button id="spawn100button" onmousedown="spawn(100)">Create 100 Workers</button><span class="cost"><span id="workerCost100">2000</span> food</span><span class="note">: Create 100 new workers</span></div>
-    			<div id='spawn1000'><button id="spawn1000button" onmousedown="spawn(1000)">Create 1000 Workers</button><span class="cost"><span id="workerCost1000">20000</span> food</span><span class="note">: Create 1000 new workers</span></div>
-    			<div id="customSpawnIncrement"><input id="spawnCustom" type="number" min="1" step="1" value="1"><button id="spawnCustomButton" onmousedown="spawnCustom()">Create Workers</button></div>
-        </div>
-      </div>
+    <div id="upgradesPane">
+	      <h3>Upgrades</h3>
+          <h3>Purchased Upgrades</h3>
+			       <div id="purchased">
+             </div>
     </div>
-    <script type="text/javascript" src="main.js"></script>
-  </body>
+    <div id="conquestPane">
+      <h3>Conquest</h3>
+    </div>
+    <div id="tradePane">
+      <h3>Trade</h3>
+    </div>
+  </div>
+</div>
+<div id="population">
+  <div id="populationContainer">
+    <h3>Population</h3>
+    <div id="populationNumbers">
+      <table>
+				<tr>
+					<td>Current Population: </td>
+					<td class="number"><span id="popcurrent">10</span></td>
+				</tr>
+				<tr>
+					<td>Maximum Population: </td>
+					<td class="number"><span id="popcap">20</span></td>
+				</tr>
+			</table>
+			<br /
+    </div>
+    <div id="populationCreate">
+      <div id="spawn1group"><button id="spawn1" onmousedown="spawn(1)" disabled>Create Worker</button><span class="cost"><span id="workerCost">10</span> food</span><span class="note">: Create a new worker</span><br /></div>
+			<div id='spawn10' hidden><button id="spawn10button" onmousedown="spawn(10)">Create 10 Workers</button><span class="cost"><span id="workerCost10">100</span> food</span><span class="note">: Create 10 new workers</span></div>
+			<div id='spawn100' hidden><button id="spawn100button" onmousedown="spawn(100)">Create 100 Workers</button><span class="cost"><span id="workerCost100">1000</span> food</span><span class="note">: Create 100 new workers</span></div>
+			<div id='spawn1000' hidden><button id="spawn1000button" onmousedown="spawn(1000)">Create 1000 Workers</button><span class="cost"><span id="workerCost1000">10000</span> food</span><span class="note">: Create 1000 new workers</span></div>
+			<div id="customSpawnIncrement" hidden><input id="spawnCustom" type="number" min="1" step="1" value="1"><button id="spawnCustomButton" onmousedown="spawnCustom()">Create Workers</button></div>
+    </div>
+  </div>
+  <div id="jobsContainer">
+    <h3>Jobs</h3>
+    <table id="jobs">
+      <tr id="customJobIncrement" hidden>
+        <td class="jobNone"></td>
+				<td class="jobCustom"></td>
+				<td class="job100"></td>
+				<td class="job10"></td>
+				<td></td>
+				<td>Increment:</td>
+				<td><input id="jobCustom" type="number" min="1" step="1" value="1"></td>
+				<td></td>
+				<td class="job10"></td>
+				<td class="job100"></td>
+				<td class="jobCustom"></td>
+				<td class="jobAll"></td>
+				<td><span class="note"></span></td>
+      </tr>
+      <tr id="unempgroup">
+				<td class="jobNone" hidden></td>
+				<td class="jobCustom" hidden></td>
+				<td class="job100" hidden></td>
+				<td class="job10" hidden></td>
+				<td></td>
+				<td>Unemployed: </td>
+				<td class="number"><span id="unemployed">0</span></td>
+				<td></td>
+				<td class="job10" hidden></td>
+				<td class="job100" hidden></td>
+				<td class="jobCustom" hidden></td>
+				<td class="jobAll" hidden></td>
+				<td><span class="note">Unassigned Workers</span></td>
+			</tr>
+      <tr id="sickGroup">
+				<td class="jobNone" hidden></td>
+				<td class="jobCustom" hidden></td>
+				<td class="job100" hidden></td>
+				<td class="job10" hidden></td>
+				<td></td>
+				<td>Sick: </td>
+				<td class="number"><span id="sickTotal">0</span></td>
+				<td></td>
+				<td class="job10" hidden></td>
+				<td class="job100" hidden></td>
+				<td class="jobCustom" hidden></td>
+				<td class="jobAll" hidden></td>
+				<td><span class="note">Sick workers</span></td>
+			</tr>
+      <tr id="foragergroup">
+				<td class="jobNone" hidden><button onmousedown="fireAll('foragers');">-All</button></td>
+				<td class="jobCustom" hidden><button onmousedown="fireCustom('foragers');">-Custom</button></td>
+				<td class="job100" hidden><button onmousedown="fire('foragers',100);">-100</button></td>
+				<td class="job10" hidden><button onmousedown="fire('foragers',10);">-10</button></td>
+				<td><button onmousedown="fire('foragers',1);">&lt;</button></td>
+				<td class="job">Foragers: </td>
+				<td class="number"><span id="foragers">10</span></td>
+				<td><button onmousedown="hire('foragers',1);">&gt;</button></td>
+				<td class="job10" hidden><button onmousedown="hire('foragers',10);">+10</button></td>
+				<td class="job100" hidden><button onmousedown="hire('foragers',100);">+100</button></td>
+				<td class="jobCustom" hidden><button onmousedown="hireCustom('foragers');">+Custom</button></td>
+				<td class="jobAll" hidden><button onmousedown="hireAll('foragers');">Max</button></td>
+				<td><span class="note">Automatically gathers food at a slow rate</span></td>
+			</tr>
+      <tr id="huntergroup">
+				<td class="jobNone" hidden><button onmousedown="fireAll('hunters');">-All</button></td>
+				<td class="jobCustom" hidden><button onmousedown="fireCustom('hunters');">-Custom</button></td>
+				<td class="job100" hidden><button onmousedown="fire('hunters',100);">-100</button></td>
+				<td class="job10" hidden><button onmousedown="fire('hunters',10);">-10</button></td>
+				<td><button onmousedown="fire('hunters',1);">&lt;</button></td>
+				<td class="job">Hunters: </td>
+				<td class="number"><span id="hunters">0</span></td>
+				<td><button onmousedown="hire('hunters',1);">&gt;</button></td>
+				<td class="job10" hidden><button onmousedown="hire('hunters',10);">+10</button></td>
+				<td class="job100" hidden><button onmousedown="hire('hunters',100);">+100</button></td>
+				<td class="jobCustom" hidden><button onmousedown="hireCustom('hunters');">+Custom</button></td>
+				<td class="jobAll" hidden><button onmousedown="hireAll('hunters');">Max</button></td>
+				<td><span class="note">Protects the tribe, turns boar into food</span></td>
+			</tr>
+      <tr id="wolfgroup">
+				<td class="jobNone" hidden></td>
+				<td class="jobCustom" hidden></td>
+				<td class="job100" hidden></td>
+				<td class="job10" hidden></td>
+				<td></td>
+				<td class="enemy">Wolves: </td>
+				<td class="number"><span id="wolves">0</span></td>
+				<td></td>
+				<td class="job10" hidden></td>
+				<td class="job100" hidden></td>
+				<td class="jobCustom" hidden></td>
+				<td class="jobAll" hidden></td>
+				<td><span class="note"></span></td>
+			</tr>
+      <tr id="boargroup">
+				<td class="jobNone" hidden></td>
+				<td class="jobCustom" hidden></td>
+				<td class="job100" hidden></td>
+				<td class="job10" hidden></td>
+				<td></td>
+				<td class="enemy">Boar: </td>
+				<td class="number"><span id="boar">0</span></td>
+				<td></td>
+				<td class="job10" hidden></td>
+				<td class="job100" hidden></td>
+				<td class="jobCustom" hidden></td>
+				<td class="jobAll" hidden></td>
+				<td><span class="note"></span></td>
+			</tr>
+    </table>
+  </div>
+</div>
+<script type="text/javascript" src="main.js"></script>
+</body>
 </html>
